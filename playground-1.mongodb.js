@@ -73,16 +73,57 @@ use('SampleCollections');
 
 // db.getCollection('video_movieDetails').find({});
 
-// ? en cours
-db.getCollection('video_movieDetails').aggregate([
-    { 
-        $unwind: "$actors" 
-    },
-    {
-        $group: {
-            _id: {actors: "$actors", rated: "$imdb.rating"},
-            // _id: "$rated",
-            // moyenne: { $avg: "$imbd.rating"},
-        }
-    }
-]);
+// db.getCollection('video_movieDetails').find({})
+// db.getCollection('video_movieDetails').aggregate([
+//     { 
+//         $unwind: "$actors" 
+//     },
+//     {
+//         $group: {
+//             _id: {actor: "$actors", rated: "$rated"},
+//             avgRating: {
+//                 $avg: "$imdb.rating"
+//             },
+//             movies: { 
+//                 $addToSet: {
+//                     title: "$title",
+//                     rating: "$imdb.rating"
+//                 } 
+//             }
+//         }
+//     },
+//     {
+//         $group: {
+//             _id: "$_id.actor",
+//             rateds: {
+//                 $addToSet: {
+//                     rated: "$_id.rated",
+//                     avgRating: "$avgRating",
+//                     movies: "$movies"
+//                 }
+//             }
+//         }
+//     }
+// ]);
+
+// db.video_movieDetails
+// lister pour chaque genre de films, 
+// les différents rated (rated), avec le pire film 
+// et le meilleur film selon imdb
+// ? pas terminé
+// db.video_movieDetails.aggregate([
+//     { 
+//         $unwind: "$genres" 
+//     },
+//     {
+//         $group: {
+//             _id: {
+//                 genre: "$genres",
+//                 rated: "$rated"
+//             },
+//             rating: {
+//                 $min: "$imdb.rating"
+//             }
+//         }
+//     },
+// ]);
